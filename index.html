@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 2.2em;
+            color: #222;
+        }
+        h2 {
+            margin: 0 0 24px 0;
+            font-size: 1.2em;
+            color: #888;
+            font-weight: 400;
+        }
+        .about {
+            margin-bottom: 24px;
+            color: #444;
+            line-height: 1.7;
+        }
+        .links {
+            display: flex;
+            gap: 16px;
+        }
+        .links a {
+            text-decoration: none;
+            color: #fff;
+            background: #4e54c8;
+            padding: 8px 20px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .links a:hover {
+            background: #8f94fb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" align="center">
+        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="头像" class="avatar">
+        <h1>你的名字</h1>
+        <h2>你的职业 / 兴趣标签</h2>
+        <div class="about">
+            <p>这里可以写一段自我介绍，比如你的技能、经历、兴趣爱好等。</p>
+        </div>
+        <div class="links">
+            <a href="mailto:your@email.com">邮箱</a>
+            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>
