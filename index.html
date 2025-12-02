@@ -3,227 +3,1171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leo 的个人主页</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Leo Qin's Personal Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --accent: #667eea;
+            --accent-2: #f093fb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Open Sans', Arial, sans-serif;
-            background: #fff;
-            margin: 0;
-            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                radial-gradient(2px 2px at 80% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+                radial-gradient(1px 1px at 60% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 80%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 60%, #fff, transparent),
+                radial-gradient(1px 1px at 90% 80%, #fff, transparent),
+                radial-gradient(1px 1px at 10% 50%, #fff, transparent),
+                radial-gradient(1px 1px at 50% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 95% 10%, #fff, transparent);
+            animation: twinkle 3s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
         .container {
-            max-width: 1100px;
-            min-height: 80vh;
-            margin: 0;
-            background: #fff;
-            box-shadow: none;
-            border-radius: 0;
-            padding: 0;
-            display: flex;
-            gap: 48px;
-            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
-        .profile {
-            flex: 0 0 180px;
-            text-align: left;
-            margin-top: 32px;
-            margin-left: 32px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+
+        .header {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: none;
-            margin-bottom: 18px;
-            border: 2px solid #eee;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
         }
-        h1 {
-            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
-            font-size: 2.2em;
-            color: #111;
-            margin: 0 0 10px 0;
-            letter-spacing: 1px;
-            font-weight: 700;
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
         }
-        h2 {
-            font-size: 1.3em;
-            color: #555;
-            font-weight: 500;
-            margin: 0 0 22px 0;
-        }
-        .about {
-            margin-bottom: 36px;
-            color: #444;
-            font-size: 1.08em;
-            line-height: 2.1;
-            text-align: left;
-        }
-        .contact {
-            margin-top: 8px;
-            font-size: 1.08em;
-            color: #444;
-            line-height: 2.1;
-        }
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
             align-items: center;
         }
-        .section {
-            margin-bottom: 38px;
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        .section-title {
-            font-size: 1.35em;
-            color: #111;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
+
+        .avatar-container:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2)) padding-box,
+                       linear-gradient(45deg, var(--accent), var(--accent-2)) border-box;
+            padding: 3px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); }
+            50% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6); }
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        .profile-info h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .profile-info h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            border-radius: 2px;
+        }
+
+        .bio {
+            font-size: 1em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            width: 100%;
             text-align: left;
+            padding: 0 5px;
         }
-        .main-content {
-            flex: 1;
+
+        
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            height: 320px;  /* 统一固定高度 */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .section.collapsed {
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .section:not(.collapsed) {
+            height: 320px; /* 展开时固定高度，与收起时保持一致 */
+            overflow: visible;
+        }
+
+        .section-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+            transition-delay: 0.1s;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section:not(.collapsed) .section-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 1;
+            transform: none;
+            position: relative;
+            z-index: 2;
+            font-size: 1.6em;  /* 统一字体大小 */
+            display: flex;
+            align-items: center;
+            gap: 12px;  /* 图标和文字的间距 */
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 1.3em;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section.collapsed .section-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            width: 220px;  /* 固定宽度 */
+            min-width: 220px;
+            max-width: 220px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .section:not(.collapsed) .section-title {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: none;
+            margin-bottom: 20px;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+
+        .skill-grid {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            grid-auto-rows: auto !important;
+            gap: 8px !important;  /* 减少间距 */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+            transition-delay: 0.2s;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section:not(.collapsed) .skill-grid {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card {
+            width: 100% !important;
+            max-width: 100% !important;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 12px;  /* 减少padding */
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            margin-left: 0;
+            align-items: center;
+            gap: 8px;  /* 减少gap */
+            width: 100%;
+            box-sizing: border-box;
         }
-        .divider {
-            width: 2px;
-            background: #eee;
-            min-height: 80vh;
-            margin: 0 24px;
-            align-self: stretch;
+
+        .project-list,
+        .hobby-list {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+            transition-delay: 0.2s;
+            width: 100%;
+            padding: 0;
+            margin: 0;
         }
-        ul {
-            padding-left: 18px;
-            font-size: 1.08em;
-            color: #555;
+
+        .section:not(.collapsed) .project-list,
+        .section:not(.collapsed) .hobby-list {
+            opacity: 1;
+            transform: translateY(0);
         }
-        li {
+
+        .skill-card {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+        }
+
+        .section:not(.collapsed) .skill-card:nth-child(1) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.3s;
+        }
+
+        .section:not(.collapsed) .skill-card:nth-child(2) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.4s;
+        }
+
+        .section:not(.collapsed) .skill-card:nth-child(3) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.5s;
+        }
+
+        .section:not(.collapsed) .skill-card:nth-child(4) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.6s;
+        }
+
+        .project-list li,
+        .hobby-list li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
+        }
+
+        .section:not(.collapsed) .project-list li:nth-child(1),
+        .section:not(.collapsed) .hobby-list li:nth-child(1) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.3s;
+        }
+
+        .section:not(.collapsed) .project-list li:nth-child(2),
+        .section:not(.collapsed) .hobby-list li:nth-child(2) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.4s;
+        }
+
+        .section:not(.collapsed) .project-list li:nth-child(3),
+        .section:not(.collapsed) .hobby-list li:nth-child(3) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.5s;
+        }
+
+        .section:not(.collapsed) .project-list li:nth-child(4),
+        .section:not(.collapsed) .hobby-list li:nth-child(4) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.6s;
+        }
+
+        
+
+        .skill-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-title {
+            font-weight: 600;
+            font-size: 1.1em;
             margin-bottom: 10px;
         }
+
+        .skill-desc {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.5;
+            max-width: 100%;
+            width: 100%;
+            word-wrap: break-word;
+            text-align: center;
+        }
+
+        .project-list, .hobby-list {
+            list-style: none;
+        }
+
+        .project-list li, .hobby-list li {
+            padding: 10px 12px;  /* 减少padding */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;  /* 减少gap */
+        }
+
+        .project-list li:last-child, .hobby-list li:last-child {
+            border-bottom: none;
+        }
+
+        .project-list li:hover, .hobby-list li:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .project-icon, .hobby-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            max-width: 40px;
+            max-height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+            z-index: 2;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .project-icon i, .hobby-icon i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            margin: 0;
+            padding: 0;
+            width: auto;
+            height: auto;
+            display: inline-flex;
+        }
+
+        .project-list li div, .hobby-list li div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .project-list li div > div:first-child, .hobby-list li div > div:first-child {
+            text-align: left;
+            width: 100%;
+            font-weight: 600;
+            font-size: 1em;
+            color: #fff;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-list li div > div:last-child, .hobby-list li div > div:last-child {
+            text-align: left;
+            width: 100%;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 80px;
+            position: relative;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .contact-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon-container {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            color: #fff;
+        }
+
+        .contact-value {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(5px);
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-item.expanded .contact-value {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-item.expanded {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
+            border-color: rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-item.expanded .contact-icon {
+            animation: pulse 2s infinite;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            border: none;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
         @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-                padding: 32px 8px;
-                gap: 24px;
+            .profile-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
-            .profile {
-                margin-bottom: 24px;
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5em;
             }
         }
+
         @media (max-width: 600px) {
-            .container {
-                padding: 12px 2px;
+            .header {
+                padding: 25px;
             }
+
+            .avatar {
+                width: 140px;
+                height: 140px;
+            }
+
             h1 {
                 font-size: 2em;
-            }
-            h2 {
-                font-size: 1em;
-            }
-            .avatar {
-                width: 100px;
-                height: 100px;
-            }
-            .links a {
-                padding: 10px 12px;
-                font-size: 0.95em;
             }
         }
     </style>
 </head>
-<body style="position:relative;">
-    <canvas id="particles-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
-    <div class="container" style="position:relative;z-index:2;">
-        <div class="profile">
-            <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Leo头像" class="avatar">
-            <h1>Leo</h1>
-            <h2>睡觉爱好者</h2>
-            <div class="contact">
-                <div>邮箱：<a href="mailto:leo@email.com" style="color:#0072c6;text-decoration:none;">leo@email.com</a></div>
-                <div>GitHub：<a href="https://github.com/leoq77777" target="_blank" style="color:#0072c6;text-decoration:none;">leoq77777</a></div>
-                <div>LinkedIn：<a href="https://www.linkedin.com/in/leoq77777" target="_blank" style="color:#0072c6;text-decoration:none;">leoq77777</a></div>
+<body>
+    <div class="stars"></div>
+    <div class="nebula"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="profile-grid">
+                <div>
+                    <div class="avatar-container" onclick="animateAvatar()">
+                        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Leo头像" class="avatar">
+                        <div class="avatar-glow"></div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1>Leo</h1>
+                    <h2><i class="fas fa-moon"></i> Sleep Enthusiast & Code Learner</h2>
+                    <p class="bio">I'm Leo, an econ undergraduate on the journey of CS.</p>
+                    
+                    
+
+                    <div class="contact-info">
+                        <div class="contact-item" onmouseenter="expandContact(this)" onmouseleave="collapseContact(this)" data-contact="email" data-value="leoq728@163.com" data-url="mailto:leoq728@163.com" onclick="handleContactClick(this)">
+                            <div class="contact-icon-container">
+                                <i class="fas fa-envelope contact-icon"></i>
+                            </div>
+                            <div class="contact-value" style="display: none;">leoq728@163.com</div>
+                        </div>
+                        <div class="contact-item" onmouseenter="expandContact(this)" onmouseleave="collapseContact(this)" data-contact="github" data-value="leoq77777" data-url="https://github.com/leoq77777" onclick="handleContactClick(this)">
+                            <div class="contact-icon-container">
+                                <i class="fab fa-github contact-icon"></i>
+                            </div>
+                            <div class="contact-value" style="display: none;">leoq77777</div>
+                        </div>
+                        <div class="contact-item" onmouseenter="expandContact(this)" onmouseleave="collapseContact(this)" data-contact="linkedin" data-value="leoq77777" data-url="https://cn.linkedin.com/in/yutong-qin-631895354?trk=people-guest_people_search-card" onclick="handleContactClick(this)">
+                            <div class="contact-icon-container">
+                                <i class="fab fa-linkedin contact-icon"></i>
+                            </div>
+                            <div class="contact-value" style="display: none;">Yutong Qin</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="divider"></div>
-        <div class="main-content">
-            <div class="about section">
-                <div class="section-title">关于我</div>
-                <p>你好！我是 Leo！</p>
+
+        <div class="content-grid">
+            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <div class="section-title">
+                    <i class="fas fa-user"></i>
+                    About Me
+                </div>
+                <div class="section-content">
+                    <p class="bio">I received my bachelor degree of Economics from <a href="https://www.nju.edu.cn" target="_blank" style="color: #667eea; text-decoration: none; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(102,126,234,0.3);">Nanjing University</a>, yet professional in neither Econ, nor CS</p>
+                    <br>
+                    <p class="bio">While I'm stumbling in pursuing a Master of Computer Science</p>
+                </div>
             </div>
-            <div class="section">
-                <div class="section-title">技能专长</div>
-                <ul>
-                    <li>C++, Python书籍购买</li>
-                    <li>Windows, Linux安装与卸载</li>
-                </ul>
+
+            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <div class="section-title">
+                    <i class="fas fa-laptop-code"></i>
+                    Skills
+                </div>
+                <div class="section-content">
+                    <div class="skill-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="skill-title">C & C++</div>
+                            <div class="skill-desc">Dream to be a Pointer expert</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="skill-title">AI Application</div>
+                            <div class="skill-desc">I use AI everyday!</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="section">
-                <div class="section-title">项目经历</div>
-                <ul>
-                    <li>使用ai完成毕业论文</li>
-                </ul>
+
+            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <div class="section-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Projects
+                </div>
+                <div class="section-content">
+                    <ul class="project-list">
+                        <li>
+                            <div class="project-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600; font-size:1.1em;">AI Agents</div>
+                                <div style="color:var(--text-secondary)">an LLM-powered investment advisor</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="project-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600; font-size:1.1em;">Game Development</div>
+                                <div style="color:var(--text-secondary)">a broken yet exhausting imitation of RimWorld</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="project-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600; font-size:1.1em;">Others</div>
+                                <div style="color:var(--text-secondary)">Learning and implement of Tiny Webserver & Muduo</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="section">
-                <div class="section-title">兴趣爱好</div>
-                <ul>
-                    <li>吃饭</li>
-                    <li>睡觉</li>
-                    <li>打游戏</li>
-                </ul>
+
+            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <div class="section-title">
+                    <i class="fas fa-heart"></i>
+                    Interests
+                </div>
+                <div class="section-content">
+                    <ul class="hobby-list">
+                        <li>
+                            <div class="hobby-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600">ESports</div>
+                                <div style="color:var(--text-secondary)">Won a second-place in NJU Valorant Competition as Team Leader</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hobby-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Music</div>
+                                <div style="color:var(--text-secondary)">Into Lauv, NIKI, KPOP, R&B</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hobby-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Movies</div>
+                                <div style="color:var(--text-secondary)">Horror and Romance Lover</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="hobby-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Language</div>
+                                <div style="color:var(--text-secondary)">I am learning English, Korean and Spanish</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
+
+        <div class="footer">
+            <p>✨ Wish you a good luck ✨</p>
         </div>
     </div>
+
+    <button class="floating-button" onclick="scrollToTop()" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script>
-    // 简单黑色粒子背景
-    const canvas = document.getElementById('particles-bg');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 60;
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    function random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: random(0, canvas.width),
-            y: random(0, canvas.height),
-            r: random(1, 2.2),
-            dx: random(-0.5, 0.5),
-            dy: random(-0.5, 0.5)
-        });
-    }
-    function drawParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let p of particles) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = '#222';
-            ctx.globalAlpha = 0.7;
-            ctx.fill();
-            ctx.globalAlpha = 1;
-            p.x += p.dx;
-            p.y += p.dy;
-            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        // 头像动画效果
+        function animateAvatar() {
+            const avatar = document.querySelector('.avatar');
+            avatar.style.transform = 'rotate(360deg) scale(1.1)';
+            setTimeout(() => {
+                avatar.style.transform = 'scale(1.05)';
+            }, 500);
+            
+            showToast('Rooootating');
         }
-        requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
+
+        // 显示提示消息
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, var(--accent), var(--accent-2));
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+                z-index: 1000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+                backdrop-filter: blur(10px);
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 2000);
+        }
+
+        // 页面滚动动画
+
+        // 悬停展开联系方式
+        function expandContact(element) {
+            element.classList.add('expanded');
+            element.style.transform = 'translateY(-3px) scale(1.02)';
+            element.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.3)';
+            
+            const contactValue = element.querySelector('.contact-value');
+            if (contactValue) {
+                contactValue.style.display = 'block';
+                contactValue.style.opacity = '1';
+                contactValue.style.transform = 'translateY(0)';
+            }
+        }
+
+        // 鼠标离开收起联系方式
+        function collapseContact(element) {
+            element.classList.remove('expanded');
+            element.style.transform = 'translateY(0) scale(1)';
+            element.style.boxShadow = 'none';
+            
+            const contactValue = element.querySelector('.contact-value');
+            if (contactValue) {
+                contactValue.style.display = 'none';
+                contactValue.style.opacity = '0';
+                contactValue.style.transform = 'translateY(5px)';
+            }
+        }
+
+        // 点击联系方式处理
+        function handleContactClick(element) {
+            const contactType = element.dataset.contact;
+            const value = element.dataset.value;
+            const url = element.dataset.url;
+            
+            if (contactType === 'email') {
+                navigator.clipboard.writeText(value).then(() => {
+                    showToast('Mail Address Copied to clipboard: ' + value);
+                }).catch(() => {
+                    showToast('Copy failed, please copy manually.');
+                });
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+
+        // 悬停展开卡片
+        function expandSection(element) {
+            element.classList.remove('collapsed');
+            element.style.height = 'auto';
+            
+            // 强制重绘以触发CSS transition
+            void element.offsetWidth;
+            
+            // 确保内容可见
+            const content = element.querySelector('.section-content');
+            if (content) {
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }
+            
+            // 确保skill-grid可见
+            const skillGrid = element.querySelector('.skill-grid');
+            if (skillGrid) {
+                skillGrid.style.opacity = '1';
+                skillGrid.style.transform = 'translateY(0)';
+            }
+            
+            // 确保列表可见
+            const lists = element.querySelectorAll('.project-list, .hobby-list');
+            lists.forEach(list => {
+                list.style.opacity = '1';
+                list.style.transform = 'translateY(0)';
+            });
+            
+            // 确保skill-card可见
+            const skillCards = element.querySelectorAll('.skill-card');
+            skillCards.forEach((card, index) => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+                card.style.transitionDelay = (0.3 + index * 0.1) + 's';
+            });
+            
+            // 确保列表项可见
+            const listItems = element.querySelectorAll('.project-list li, .hobby-list li');
+            listItems.forEach((item, index) => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+                item.style.transitionDelay = (0.3 + index * 0.1) + 's';
+            });
+        }
+
+        // 鼠标离开收起卡片
+        function collapseSection(element) {
+            element.classList.add('collapsed');
+            // 强制设置高度为120px以确保正确收起
+            element.style.height = '120px';
+            
+            // 确保内容隐藏
+            const content = element.querySelector('.section-content');
+            if (content) {
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(20px)';
+            }
+            
+            // 确保skill-grid隐藏
+            const skillGrid = element.querySelector('.skill-grid');
+            if (skillGrid) {
+                skillGrid.style.opacity = '0';
+                skillGrid.style.transform = 'translateY(20px)';
+            }
+            
+            // 确保列表隐藏
+            const lists = element.querySelectorAll('.project-list, .hobby-list');
+            lists.forEach(list => {
+                list.style.opacity = '0';
+                list.style.transform = 'translateY(20px)';
+            });
+            
+            // 确保skill-card隐藏
+            const skillCards = element.querySelectorAll('.skill-card');
+            skillCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(-20px)';
+            });
+            
+            // 确保列表项隐藏
+            const listItems = element.querySelectorAll('.project-list li, .hobby-list li');
+            listItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+            });
+        }
+
+        // 点击详细信息时的处理
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (e.target.classList.contains('contact-value')) {
+                    const contactType = this.dataset.contact;
+                    const value = this.dataset.value;
+                    const url = this.dataset.url;
+                    
+                    if (contactType === 'email') {
+                        navigator.clipboard.writeText(value).then(() => {
+                            showToast('邮箱地址已复制到剪贴板！');
+                            window.location.href = url;
+                        }).catch(() => {
+                            window.location.href = url;
+                        });
+                    } else {
+                        window.open(url, '_blank');
+                    }
+                }
+            });
+        });
+
+        // 点击页面其他地方收起所有联系方式
+        document.addEventListener('click', (e) => {
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach(item => {
+                const value = item.querySelector('.contact-value');
+                if (value && value.style.display === 'block' && !item.contains(e.target)) {
+                    item.classList.remove('expanded');
+                    value.style.display = 'none';
+                }
+            });
+        });
+
+        // 页面滚动动画
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 滚动时的视差效果
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const nebula = document.querySelector('.nebula');
+            const stars = document.querySelector('.stars');
+            
+            if (nebula) {
+                nebula.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            if (stars) {
+                stars.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+
+        // 鼠标跟随效果
+        document.addEventListener('mousemove', (e) => {
+            const sections = document.querySelectorAll('.section');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            sections.forEach((section, index) => {
+                const intensity = (index + 1) * 0.5;
+                section.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
+            });
+        });
+
+        // 页面加载完成后的动画
+        window.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                // 立即设置所有元素为隐藏状态，防止闪烁
+                section.classList.add('collapsed');
+                section.style.height = '120px';
+                section.style.overflow = 'hidden';
+                
+                // 确保所有内容立即隐藏
+                const content = section.querySelector('.section-content');
+                if (content) {
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(20px)';
+                    content.style.display = 'block';
+                }
+                
+                const skillGrid = section.querySelector('.skill-grid');
+                if (skillGrid) {
+                    skillGrid.style.opacity = '0';
+                    skillGrid.style.transform = 'translateY(20px)';
+                    skillGrid.style.display = 'grid';
+                }
+                
+                const lists = section.querySelectorAll('.project-list, .hobby-list');
+                lists.forEach(list => {
+                    list.style.opacity = '0';
+                    list.style.transform = 'translateY(20px)';
+                    list.style.display = 'block';
+                });
+                
+                const skillCards = section.querySelectorAll('.skill-card');
+                skillCards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateX(-20px)';
+                    card.style.display = 'flex';
+                });
+                
+                const listItems = section.querySelectorAll('.project-list li, .hobby-list li');
+                listItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(-20px)';
+                    item.style.display = 'flex';
+                });
+                
+                // 强制重绘，确保隐藏状态立即生效
+                void section.offsetWidth;
+            });
+        });
     </script>
 </body>
 </html>
