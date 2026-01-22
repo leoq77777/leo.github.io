@@ -190,29 +190,38 @@ class ResourcesManager {
 
         // 如果是文档标签页，由 docsManager 处理
         if (tabType === 'docs') {
-            if (typeof docsManager !== 'undefined') {
-                // 确保文档列表已加载
-                if (docsManager.docs.length === 0) {
-                    panel.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>加载文档列表...</p>
-                        </div>
-                    `;
-                    // 重新加载文档列表
-                    docsManager.loadDocsList().then(() => {
-                        docsManager.renderInPanel(panel);
-                    });
-                } else {
-                    docsManager.renderInPanel(panel);
-                }
-            } else {
+            // 等待一下确保 docsManager 已初始化
+            if (typeof docsManager === 'undefined') {
+                // 如果还没初始化，等待一下再试
+                setTimeout(() => {
+                    if (typeof docsManager !== 'undefined') {
+                        this.renderTabContent('docs');
+                    } else {
+                        panel.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-file-alt"></i>
+                                <p>暂无文档</p>
+                            </div>
+                        `;
+                    }
+                }, 500);
+                return;
+            }
+
+            // 确保文档列表已加载
+            if (docsManager.docs.length === 0) {
                 panel.innerHTML = `
                     <div class="empty-state">
-                        <i class="fas fa-file-alt"></i>
-                        <p>文档管理器未初始化</p>
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>加载文档列表...</p>
                     </div>
                 `;
+                // 重新加载文档列表
+                docsManager.loadDocsList().then(() => {
+                    docsManager.renderInPanel(panel);
+                });
+            } else {
+                docsManager.renderInPanel(panel);
             }
             return;
         }

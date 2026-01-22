@@ -286,7 +286,6 @@ class FileStorageManager {
                 <div class="empty-state">
                     <i class="fas fa-cloud"></i>
                     <p>暂无文件</p>
-                    <p style="font-size: 0.9em; margin-top: 8px; opacity: 0.7;">后端服务未运行或无法连接</p>
                 </div>
             `;
             return;
