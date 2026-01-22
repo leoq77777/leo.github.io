@@ -101,13 +101,14 @@ class DocsManager {
             }
 
             const files = await response.json();
-            // 过滤出 .md 文件
+            // 过滤出 .md 文件（排除 index.json）
             const mdFiles = files
-                .filter(file => file.name.endsWith('.md') && file.type === 'file')
+                .filter(file => file.name.endsWith('.md') && file.type === 'file' && file.name !== 'index.json')
                 .map(file => ({
                     name: file.name,
                     title: this.getTitleFromFileName(file.name),
-                    sha: file.sha
+                    sha: file.sha,
+                    updated: file.updated_at || file.modified_at || null
                 }));
 
             return mdFiles;
@@ -258,10 +259,28 @@ class DocsManager {
 
         docsList.innerHTML = this.docs.map(doc => {
             const title = doc.title || this.getTitleFromFileName(doc.name);
+            let dateStr = '';
+            if (doc.updated) {
+                try {
+                    const date = new Date(doc.updated);
+                    dateStr = date.toLocaleDateString('zh-CN', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                } catch (e) {
+                    // 日期解析失败，忽略
+                }
+            }
             return `
                 <div class="docs-item" onclick="docsManager.openDoc('${doc.name}')">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="docs-item-title">${title}</span>
+                    <div class="docs-item-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="docs-item-content">
+                        <div class="docs-item-title">${title}</div>
+                        ${dateStr ? `<div class="docs-item-date">${dateStr}</div>` : ''}
+                    </div>
                     <i class="fas fa-chevron-right docs-item-arrow"></i>
                 </div>
             `;
