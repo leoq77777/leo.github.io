@@ -95,12 +95,16 @@ class ResourcesManager {
                     <button class="tab-button" data-tab="files">
                         <i class="fas fa-cloud"></i> Files
                     </button>
+                    <button class="tab-button" data-tab="docs">
+                        <i class="fas fa-file-alt"></i> Docs
+                    </button>
                 </div>
                 <div class="resources-content">
                     <div class="tab-panel active" id="websites-panel"></div>
                     <div class="tab-panel" id="tools-panel"></div>
                     <div class="tab-panel" id="insights-panel"></div>
                     <div class="tab-panel" id="files-panel"></div>
+                    <div class="tab-panel" id="docs-panel"></div>
                 </div>
             `;
         } else {
@@ -121,12 +125,16 @@ class ResourcesManager {
                     <button class="tab-button" data-tab="files">
                         <i class="fas fa-cloud"></i> Files
                     </button>
+                    <button class="tab-button" data-tab="docs">
+                        <i class="fas fa-file-alt"></i> Docs
+                    </button>
                 </div>
                 <div class="resources-content">
                     <div class="tab-panel active" id="websites-panel"></div>
                     <div class="tab-panel" id="tools-panel"></div>
                     <div class="tab-panel" id="insights-panel"></div>
                     <div class="tab-panel" id="files-panel"></div>
+                    <div class="tab-panel" id="docs-panel"></div>
                 </div>
             `;
             resourcesSection.appendChild(newContent);
