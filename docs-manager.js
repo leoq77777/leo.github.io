@@ -109,15 +109,37 @@ class DocsManager {
             const files = await response.json();
             // 过滤出 .md 文件（排除 index.json）
             const mdFiles = files
-                .filter(file => file.name.endsWith('.md') && file.type === 'file' && file.name !== 'index.json')
-                .map(file => ({
-                    name: file.name,
-                    title: this.getTitleFromFileName(file.name),
-                    sha: file.sha,
-                    updated: file.updated_at || file.modified_at || null
-                }));
+                .filter(file => file.name.endsWith('.md') && file.type === 'file' && file.name !== 'index.json');
 
-            return mdFiles;
+            // 获取每个文件的最后修改日期
+            const filesWithDates = await Promise.all(
+                mdFiles.map(async (file) => {
+                    let updated = null;
+                    try {
+                        // 使用 commits API 获取文件的最后提交时间
+                        const commitsResponse = await fetch(
+                            `https://api.github.com/repos/${repo}/commits?path=${path}/${file.name}&per_page=1`
+                        );
+                        if (commitsResponse.ok) {
+                            const commits = await commitsResponse.json();
+                            if (commits.length > 0) {
+                                updated = commits[0].commit.committer.date;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`无法获取 ${file.name} 的修改日期:`, e);
+                    }
+
+                    return {
+                        name: file.name,
+                        title: this.getTitleFromFileName(file.name),
+                        sha: file.sha,
+                        updated: updated
+                    };
+                })
+            );
+
+            return filesWithDates;
         } catch (error) {
             console.error('从 GitHub API 获取文档列表失败:', error);
             return [];
