@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "name": "example.md",
+      "title": "Example"
+    },
+    {
+      "name": "README.md",
+      "title": "README"
+    }
+  ]
+}
