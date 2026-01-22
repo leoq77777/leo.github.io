@@ -173,6 +173,14 @@ class ResourcesManager {
             return;
         }
 
+        // 如果是文档标签页，由 docsManager 处理
+        if (tabType === 'docs') {
+            if (typeof docsManager !== 'undefined') {
+                docsManager.renderInPanel(panel);
+            }
+            return;
+        }
+
         const items = this.resources[tabType] || [];
         
         if (items.length === 0) {
@@ -276,7 +284,8 @@ class ResourcesManager {
             websites: 'Webs',
             tools: 'Tools',
             insights: 'Thoughts',
-            files: 'Files'
+            files: 'Files',
+            docs: 'Docs'
         };
         return labels[type] || '';
     }

@@ -48,6 +48,7 @@ class DocsManager {
     async init() {
         await this.loadDocsList();
         this.createDocsSection();
+        // 文档现在集成在 Resources 标签页中，不需要单独创建 section
     }
 
     /**
@@ -116,17 +117,27 @@ class DocsManager {
     }
 
     /**
-     * 创建文档部分
+     * 创建文档部分（集成到 Resources 标签页）
      */
     createDocsSection() {
-        // 查找或创建文档部分
-        let docsSection = this.findOrCreateDocsSection();
-        if (!docsSection) return;
+        // 文档现在集成在 Resources 的 Docs 标签页中
+        // 这个方法保留用于初始化，但实际渲染在 renderInPanel 中
+        this.initialized = true;
+    }
 
-        const sectionContent = docsSection.querySelector('.section-content');
-        if (!sectionContent) return;
+    /**
+     * 在指定的面板中渲染文档
+     */
+    renderInPanel(panel) {
+        if (!panel) return;
 
-        sectionContent.innerHTML = `
+        // 如果面板已经有内容且是查看器模式，不重新渲染
+        if (panel.querySelector('.docs-viewer') && panel.querySelector('.docs-viewer').style.display !== 'none') {
+            return;
+        }
+
+        // 渲染文档列表
+        panel.innerHTML = `
             <div class="docs-container">
                 <div class="docs-list" id="docs-list"></div>
                 <div class="docs-viewer" id="docs-viewer" style="display: none;">
@@ -249,16 +260,23 @@ class DocsManager {
             const html = this.marked.parse(markdown);
 
             // 显示文档查看器
-            document.getElementById('docs-list').style.display = 'none';
-            const viewer = document.getElementById('docs-viewer');
-            viewer.style.display = 'block';
-            document.getElementById('docs-content').innerHTML = html;
+            const docsList = document.getElementById('docs-list');
+            const docsViewer = document.getElementById('docs-viewer');
+            const docsContent = document.getElementById('docs-content');
+            
+            if (docsList) docsList.style.display = 'none';
+            if (docsViewer) {
+                docsViewer.style.display = 'block';
+                if (docsContent) docsContent.innerHTML = html;
+            }
 
             // 高亮代码块（如果 highlight.js 可用）
             this.highlightCode();
 
             // 滚动到顶部
-            viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (docsViewer) {
+                docsViewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         } catch (error) {
             console.error('加载文档失败:', error);
             alert('加载文档失败: ' + error.message);
@@ -269,9 +287,15 @@ class DocsManager {
      * 关闭文档查看器
      */
     closeViewer() {
-        document.getElementById('docs-list').style.display = 'block';
-        document.getElementById('docs-viewer').style.display = 'none';
-        document.getElementById('docs-content').innerHTML = '';
+        const docsList = document.getElementById('docs-list');
+        const docsViewer = document.getElementById('docs-viewer');
+        
+        if (docsList) docsList.style.display = 'block';
+        if (docsViewer) {
+            docsViewer.style.display = 'none';
+            const content = document.getElementById('docs-content');
+            if (content) content.innerHTML = '';
+        }
     }
 
     /**
