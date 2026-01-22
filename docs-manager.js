@@ -141,11 +141,24 @@ class DocsManager {
             return;
         }
 
-        // 确保文档列表已加载
+        // 如果文档列表为空，显示提示
         if (this.docs.length === 0) {
-            // 如果文档列表为空，重新加载
-            this.loadDocsList().then(() => {
-                this.renderInPanel(panel);
+            panel.innerHTML = `
+                <div class="docs-empty">
+                    <i class="fas fa-inbox"></i>
+                    <p>暂无文档</p>
+                    <p class="docs-hint">在 <code>docs/</code> 目录下添加 Markdown 文件即可显示</p>
+                    <p class="docs-hint" style="margin-top: 8px; font-size: 0.85em; opacity: 0.6;">
+                        正在尝试从 GitHub API 加载...
+                    </p>
+                </div>
+            `;
+            // 尝试从 GitHub API 加载
+            this.fetchDocsFromGitHub().then(files => {
+                if (files.length > 0) {
+                    this.docs = files;
+                    this.renderInPanel(panel);
+                }
             });
             return;
         }

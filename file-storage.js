@@ -52,7 +52,8 @@ class FileStorageManager {
     }
 
     async init() {
-        await this.loadFiles();
+        this.loading = false;
+        // 不在这里自动加载，等用户点击 Files 标签时再加载
     }
 
     /**
@@ -66,6 +67,7 @@ class FileStorageManager {
      * 从后端加载文件列表
      */
     async loadFiles() {
+        this.loading = true;
         try {
             const headers = this.getHeaders(true);
             const response = await fetch(`${this.apiBaseUrl}/api/files`, {
@@ -76,8 +78,12 @@ class FileStorageManager {
             if (!response.ok) {
                 if (response.status === 401) {
                     console.warn('未授权访问');
+                } else if (response.status === 0 || response.type === 'error') {
+                    // 网络错误或 CORS 错误
+                    console.warn('无法连接到后端服务，可能后端未运行');
                 }
                 this.files = [];
+                this.loading = false;
                 return;
             }
 
@@ -85,6 +91,8 @@ class FileStorageManager {
         } catch (error) {
             console.error('加载文件列表失败:', error);
             this.files = [];
+        } finally {
+            this.loading = false;
         }
     }
 
@@ -249,9 +257,23 @@ class FileStorageManager {
     /**
      * 渲染文件列表
      */
-    renderFiles() {
+    async renderFiles() {
         const panel = document.getElementById('files-panel');
-        if (!panel) return;
+        if (!panel) {
+            console.warn('files-panel not found');
+            return;
+        }
+
+        // 如果文件列表还没加载，先加载
+        if (this.files.length === 0 && !this.loading) {
+            panel.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>加载中...</p>
+                </div>
+            `;
+            await this.loadFiles();
+        }
 
         // 过滤可见文件（后端已过滤，但前端也做一次以确保）
         const isMaster = this.isMasterMode();
@@ -264,6 +286,7 @@ class FileStorageManager {
                 <div class="empty-state">
                     <i class="fas fa-cloud"></i>
                     <p>暂无文件</p>
+                    <p style="font-size: 0.9em; margin-top: 8px; opacity: 0.7;">后端服务未运行或无法连接</p>
                 </div>
             `;
             return;

@@ -177,6 +177,13 @@ class ResourcesManager {
         if (tabType === 'files') {
             if (typeof fileStorageManager !== 'undefined') {
                 fileStorageManager.renderFiles();
+            } else {
+                panel.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-cloud"></i>
+                        <p>文件存储功能未初始化</p>
+                    </div>
+                `;
             }
             return;
         }
@@ -184,7 +191,28 @@ class ResourcesManager {
         // 如果是文档标签页，由 docsManager 处理
         if (tabType === 'docs') {
             if (typeof docsManager !== 'undefined') {
-                docsManager.renderInPanel(panel);
+                // 确保文档列表已加载
+                if (docsManager.docs.length === 0) {
+                    panel.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>加载文档列表...</p>
+                        </div>
+                    `;
+                    // 重新加载文档列表
+                    docsManager.loadDocsList().then(() => {
+                        docsManager.renderInPanel(panel);
+                    });
+                } else {
+                    docsManager.renderInPanel(panel);
+                }
+            } else {
+                panel.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-file-alt"></i>
+                        <p>文档管理器未初始化</p>
+                    </div>
+                `;
             }
             return;
         }
