@@ -56,33 +56,39 @@ class DocsManager {
      * 加载文档列表
      */
     async loadDocsList() {
-        try {
-            // 优先从 docs/index.json 读取文件列表
-            const response = await fetch(`${this.docsPath}index.json`);
-            if (response.ok) {
-                const data = await response.json();
-                this.docs = data.files || [];
-                return;
-            }
-        } catch (error) {
-            console.warn('无法加载 index.json:', error);
-        }
-
-        // 如果 index.json 不存在，尝试从 GitHub API 获取
+        // 优先尝试从 GitHub API 获取（包含修改日期）
         try {
             this.docs = await this.fetchDocsFromGitHub();
             if (this.docs.length > 0) {
+                console.log('Loaded docs from GitHub API:', this.docs);
                 return;
             }
         } catch (error) {
             console.warn('无法从 GitHub API 获取文档列表:', error);
         }
 
+        // 如果 GitHub API 失败，尝试从 docs/index.json 读取
+        try {
+            const response = await fetch(`${this.docsPath}index.json`);
+            if (response.ok) {
+                const data = await response.json();
+                this.docs = (data.files || []).map(file => ({
+                    ...file,
+                    updated: null // index.json 中没有日期信息
+                }));
+                console.log('Loaded docs from index.json:', this.docs);
+                return;
+            }
+        } catch (error) {
+            console.warn('无法加载 index.json:', error);
+        }
+
         // 如果都失败，使用默认列表
         this.docs = [
-            { name: 'example.md', title: 'Example' },
-            { name: 'README.md', title: 'README' }
+            { name: 'example.md', title: 'Example', updated: null },
+            { name: 'README.md', title: 'README', updated: null }
         ];
+        console.log('Using default docs list:', this.docs);
     }
 
     /**
