@@ -49,6 +49,7 @@ class DocsManager {
         await this.loadDocsList();
         this.createDocsSection();
         // 文档现在集成在 Resources 标签页中，不需要单独创建 section
+        console.log('DocsManager initialized with', this.docs.length, 'docs');
     }
 
     /**
