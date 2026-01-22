@@ -2,8 +2,8 @@
             --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --card-bg: rgba(255, 255, 255, 0.1);
             --card-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #e2e8f0;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
             --accent: #667eea;
             --accent-2: #f093fb;
         }
@@ -14,12 +14,22 @@
             box-sizing: border-box;
         }
 
+        html {
+            background: #ffffff !important;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
-            background: #0f172a;
-            color: var(--text-primary);
+            background: #ffffff !important;
+            color: #212529 !important;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+        
+        /* 简约主题默认背景 */
+        body.theme-minimal {
+            background: #ffffff !important;
+            color: #212529 !important;
         }
 
         .stars {
@@ -525,7 +535,8 @@
             flex-shrink: 0;
         }
 
-        .project-list li div > div:first-child, .hobby-list li div > div:first-child {
+        .project-list li div > div:first-child, .hobby-list li div > div:first-child,
+        .project-title, .hobby-title {
             text-align: left;
             width: 100%;
             font-weight: 600;
@@ -537,12 +548,28 @@
             background-clip: text;
         }
 
-        .project-list li div > div:last-child, .hobby-list li div > div:last-child {
+        .project-list li div > div:last-child, .hobby-list li div > div:last-child,
+        .project-desc, .hobby-desc {
             text-align: left;
             width: 100%;
             color: var(--text-secondary);
             font-size: 0.9em;
             line-height: 1.5;
+        }
+
+        .link-external {
+            color: #667eea;
+            text-decoration: none;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(102,126,234,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .link-external:hover {
+            background: linear-gradient(45deg, rgba(102,126,234,0.2), rgba(240,147,251,0.2));
+            border-color: rgba(102,126,234,0.5);
         }
 
         .contact-info {

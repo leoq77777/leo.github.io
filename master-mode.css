@@ -1,0 +1,21 @@
+/**
+ * Master 模式样式
+ * 只在 Master 模式下显示的元素
+ */
+
+/* Master 模式下的删除按钮 */
+.master-mode .resource-delete.master-mode-only {
+    display: inline-block !important;
+}
+
+/* Master 模式下的添加按钮 */
+.master-mode .add-resource-button.master-mode {
+    display: block !important;
+}
+
+/* 非 Master 模式下隐藏所有编辑功能 */
+.resource-delete.master-mode-only,
+.add-resource-button.master-mode {
+    display: none !important;
+}
+

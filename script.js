@@ -9,14 +9,7 @@ function animateAvatar() {
     showToast('Rooootating');
 }
 
-// 鼠标跟随效果
-const mouseFollowElement = document.querySelector('.mouse-follow');
-if (mouseFollowElement) {
-    document.addEventListener('mousemove', (e) => {
-        mouseFollowElement.style.left = `${e.clientX - 15}px`;
-        mouseFollowElement.style.top = `${e.clientY - 15}px`;
-    });
-}
+// 鼠标跟随效果已移除（未使用的功能）
 
 // 显示提示信息
 function showToast(message) {
@@ -94,7 +87,8 @@ function handleContactClick(element) {
 // 悬停展开卡片
 function expandSection(element) {
     element.classList.remove('collapsed');
-    element.style.height = 'auto';
+    // 移除内联 transform，让 CSS 控制
+    element.style.transform = '';
 
     // 强制重绘以触发CSS transition
     void element.offsetWidth;
@@ -140,8 +134,8 @@ function expandSection(element) {
 // 鼠标离开收起卡片
 function collapseSection(element) {
     element.classList.add('collapsed');
-    // 强制设置高度为120px以确保正确收起
-    element.style.height = '120px';
+    // 移除内联 transform，让 CSS 控制
+    element.style.transform = '';
 
     // 确保内容隐藏
     const content = element.querySelector('.section-content');
@@ -179,27 +173,7 @@ function collapseSection(element) {
     });
 }
 
-// 点击详细信息时的处理
-document.querySelectorAll('.contact-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-        if (e.target.classList.contains('contact-value')) {
-            const contactType = this.dataset.contact;
-            const value = this.dataset.value;
-            const url = this.dataset.url;
-
-            if (contactType === 'email') {
-                navigator.clipboard.writeText(value).then(() => {
-                    showToast('邮箱地址已复制到剪贴板！');
-                    window.location.href = url;
-                }).catch(() => {
-                    window.location.href = url;
-                });
-            } else {
-                window.open(url, '_blank');
-            }
-        }
-    });
-});
+// 联系方式点击处理已在 HTML 中通过 onclick 处理，无需重复绑定
 
 // 点击页面其他地方收起所有联系方式
 document.addEventListener('click', (e) => {
@@ -235,15 +209,25 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 鼠标跟随效果
+// 鼠标跟随视差效果（已优化，使用节流以提高性能）
+let mouseMoveTimeout;
 document.addEventListener('mousemove', (e) => {
+    // 使用节流，减少计算频率
+    if (mouseMoveTimeout) return;
+    mouseMoveTimeout = setTimeout(() => {
+        mouseMoveTimeout = null;
+    }, 16); // 约 60fps
+
     const sections = document.querySelectorAll('.section');
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
 
     sections.forEach((section, index) => {
-        const intensity = (index + 1) * 0.5;
-        section.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
+        // 只在未展开时应用视差效果，避免与展开动画冲突
+        if (section.classList.contains('collapsed')) {
+            const intensity = (index + 1) * 0.5;
+            section.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
+        }
     });
 });
 

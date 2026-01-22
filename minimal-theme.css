@@ -1,0 +1,666 @@
+/**
+ * 简约主题样式 - 左侧边栏布局
+ * 真正的简约设计：清晰的层次、简洁的排版、专注内容
+ */
+
+/* ==================== 主题变量 ==================== */
+.theme-minimal {
+    --bg-color: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --sidebar-bg: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --accent: #495057;
+    --accent-hover: #212529;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --sidebar-width: 220px;
+}
+
+/* ==================== 基础样式 ==================== */
+html {
+    background: #ffffff !important;
+}
+
+body,
+body.theme-minimal {
+    background: #ffffff !important;
+    color: #212529 !important;
+}
+
+.theme-minimal {
+    background: #ffffff !important;
+    color: #212529 !important;
+}
+
+/* 隐藏所有装饰性背景元素 */
+.theme-minimal .stars,
+.theme-minimal .nebula {
+    display: none !important;
+}
+
+/* ==================== 容器布局 - 左侧边栏 ==================== */
+.theme-minimal .container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+}
+
+/* ==================== 左侧边栏 ==================== */
+.theme-minimal .sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.theme-minimal .sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-minimal .sidebar-nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.theme-minimal .sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.theme-minimal .sidebar-nav-link:hover {
+    background: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.theme-minimal .sidebar-nav-link.active {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    border-left: 3px solid var(--accent);
+    padding-left: calc(1rem - 3px);
+}
+
+.theme-minimal .sidebar-nav-link i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* ==================== 主内容区 ==================== */
+.theme-minimal .main-content {
+    flex: 1;
+    padding: 2rem 3rem;
+    max-width: calc(100% - var(--sidebar-width));
+    min-height: 100vh;
+}
+
+/* ==================== 头部简化 ==================== */
+.theme-minimal .header {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+}
+
+.theme-minimal .header::before {
+    display: none !important;
+}
+
+.theme-minimal .profile-grid {
+    gap: 2rem;
+    grid-template-columns: auto 1fr !important;
+}
+
+/* 头像简化 - 简约模式下完全隐藏 */
+.theme-minimal .avatar-container {
+    display: none !important;
+}
+
+.theme-minimal .avatar {
+    display: none !important;
+}
+
+.theme-minimal .avatar-glow {
+    display: none !important;
+}
+
+/* 调整profile-grid布局，移除头像列 */
+.theme-minimal .profile-grid {
+    grid-template-columns: 1fr !important;
+}
+
+/* 标题简化 */
+.theme-minimal .profile-info h1 {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    background-clip: unset !important;
+    text-shadow: none !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.theme-minimal .profile-info h2 {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 1rem !important;
+}
+
+.theme-minimal .profile-info h2::after {
+    display: none !important;
+}
+
+.theme-minimal .profile-info h2 i {
+    margin-right: 0.5rem;
+}
+
+.theme-minimal .bio {
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* ==================== 内容区域 - 分页显示 ==================== */
+.theme-minimal .content-grid {
+    display: block !important;
+    gap: 0 !important;
+}
+
+.theme-minimal .section {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border-radius: 0 !important;
+    padding: 3rem 0 !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    cursor: default !important;
+    transition: none !important;
+    position: relative;
+    min-height: calc(100vh - 4rem);
+}
+
+.theme-minimal .section:hover {
+    transform: none !important;
+    border-color: var(--border-color) !important;
+    box-shadow: none !important;
+}
+
+/* 分页模式：默认隐藏所有section，只显示当前页 */
+.theme-minimal .section {
+    display: none !important;
+}
+
+.theme-minimal .section[style*="display: block"] {
+    display: block !important;
+}
+
+/* Header在简约模式下也作为一页 */
+.theme-minimal .header {
+    display: none !important;
+    min-height: calc(100vh - 4rem);
+}
+
+.theme-minimal .header[style*="display: block"] {
+    display: block !important;
+}
+
+/* 移除卡片折叠功能 - 简约模式下始终展开 */
+.theme-minimal .section.collapsed {
+    height: auto !important;
+}
+
+.theme-minimal .section-content {
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+}
+
+/* 标题移到左侧边栏，内容区不显示标题 */
+.theme-minimal .section-title {
+    display: none !important;
+}
+
+/* Master 模式下显示标题（用于长按） */
+.theme-minimal.master-mode .section-title {
+    display: flex !important;
+    position: relative !important;
+    padding: 0.5rem 1rem !important;
+    margin-bottom: 1rem !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+}
+
+/* ==================== 技能卡片简化 ==================== */
+.theme-minimal .skill-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 1rem !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.theme-minimal .skill-card {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 6px !important;
+    padding: 1.5rem !important;
+    text-align: left !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.theme-minimal .skill-card:hover {
+    background: var(--bg-secondary) !important;
+    transform: none !important;
+}
+
+.theme-minimal .skill-icon {
+    font-size: 1.5rem !important;
+    color: var(--text-secondary) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--text-secondary) !important;
+    background-clip: unset !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.theme-minimal .skill-title {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.theme-minimal .skill-desc {
+    font-size: 0.875rem !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+}
+
+/* ==================== 列表简化 ==================== */
+.theme-minimal .project-list,
+.theme-minimal .hobby-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.theme-minimal .project-list li,
+.theme-minimal .hobby-list li {
+    padding: 1rem 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.theme-minimal .project-list li:last-child,
+.theme-minimal .hobby-list li:last-child {
+    border-bottom: none !important;
+}
+
+.theme-minimal .project-list li:hover,
+.theme-minimal .hobby-list li:hover {
+    transform: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+
+/* 图标简化 */
+.theme-minimal .project-icon,
+.theme-minimal .hobby-icon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    color: var(--text-secondary) !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.theme-minimal .project-icon i,
+.theme-minimal .hobby-icon i {
+    font-size: 0.875rem !important;
+    color: var(--text-secondary) !important;
+    position: static !important;
+    transform: none !important;
+}
+
+.theme-minimal .project-title,
+.theme-minimal .hobby-title {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    background-clip: unset !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.theme-minimal .project-desc,
+.theme-minimal .hobby-desc {
+    font-size: 0.875rem !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.6 !important;
+}
+
+/* ==================== 联系方式简化 ==================== */
+.theme-minimal .contact-info {
+    gap: 1rem !important;
+    margin-top: 1.5rem !important;
+}
+
+.theme-minimal .contact-item {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 6px !important;
+    padding: 0.75rem 1rem !important;
+    min-width: auto !important;
+    transition: none !important;
+}
+
+.theme-minimal .contact-item:hover {
+    transform: none !important;
+    border-color: var(--border-color) !important;
+    background: var(--bg-secondary) !important;
+}
+
+.theme-minimal .contact-icon-container {
+    background: var(--bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.theme-minimal .contact-icon {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+}
+
+.theme-minimal .contact-value {
+    color: var(--text-primary) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    background-clip: unset !important;
+}
+
+/* ==================== 链接简化 ==================== */
+.theme-minimal .link-external {
+    color: var(--text-primary) !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--text-secondary) !important;
+    text-underline-offset: 2px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.theme-minimal .link-external:hover {
+    text-decoration-color: var(--text-primary) !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ==================== 浮动按钮简化 ==================== */
+.theme-minimal .floating-button {
+    background: var(--text-secondary) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.2rem !important;
+}
+
+.theme-minimal .floating-button:hover {
+    background: var(--text-primary) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ==================== 页脚简化 ==================== */
+.theme-minimal .footer {
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+    margin-top: 3rem !important;
+    padding-top: 2rem !important;
+    border-top: 1px solid var(--border-color) !important;
+    text-align: left !important;
+}
+
+/* ==================== 移除所有动画 ==================== */
+.theme-minimal *,
+.theme-minimal *::before,
+.theme-minimal *::after {
+    animation: none !important;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+/* ==================== 资源部分简约样式 ==================== */
+.theme-minimal .resources-tabs {
+    border-bottom: 2px solid var(--border-color) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.theme-minimal .tab-button {
+    color: var(--text-secondary) !important;
+    border-bottom: 2px solid transparent !important;
+    margin-bottom: -2px !important;
+}
+
+.theme-minimal .tab-button:hover {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-minimal .tab-button.active {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--text-primary) !important;
+    box-shadow: none !important;
+}
+
+.theme-minimal .resource-card {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+}
+
+.theme-minimal .resource-card:hover {
+    box-shadow: var(--card-shadow) !important;
+    border-color: var(--text-secondary) !important;
+    transform: none !important;
+}
+
+.theme-minimal .resource-tag {
+    background: var(--bg-color) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* 简约模式下隐藏添加资源按钮（除非在master模式） */
+.theme-minimal .add-resource-button:not(.master-mode) {
+    display: none !important;
+}
+
+/* Master模式下的添加按钮样式 */
+.theme-minimal.master-mode .add-resource-button.master-mode {
+    display: block !important;
+    background: var(--text-primary) !important;
+    color: white !important;
+    border-radius: 6px !important;
+    margin-top: 1.5rem !important;
+}
+
+/* ==================== 模态框简约样式 ==================== */
+.theme-minimal .modal-content {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.theme-minimal .form-group input,
+.theme-minimal .form-group select,
+.theme-minimal .form-group textarea {
+    background: var(--bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-minimal .form-group input:focus,
+.theme-minimal .form-group select:focus,
+.theme-minimal .form-group textarea:focus {
+    border-color: var(--text-primary) !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-minimal .form-actions button[type="submit"] {
+    background: var(--text-primary) !important;
+    color: white !important;
+}
+
+.theme-minimal .form-actions button[type="submit"]:hover {
+    background: var(--text-secondary) !important;
+}
+
+/* ==================== 主题切换按钮简约样式 ==================== */
+.theme-minimal #theme-toggle {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+.theme-minimal #theme-toggle:hover {
+    background: var(--bg-color) !important;
+    box-shadow: var(--card-shadow-hover) !important;
+}
+
+/* ==================== 确保所有内容可见 ==================== */
+.theme-minimal .section:not(.collapsed) .section-content,
+.theme-minimal .section.collapsed .section-content {
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+}
+
+.theme-minimal .section:not(.collapsed) .skill-grid,
+.theme-minimal .section.collapsed .skill-grid {
+    opacity: 1 !important;
+    transform: none !important;
+    display: grid !important;
+}
+
+.theme-minimal .section:not(.collapsed) .project-list,
+.theme-minimal .section:not(.collapsed) .hobby-list,
+.theme-minimal .section.collapsed .project-list,
+.theme-minimal .section.collapsed .hobby-list {
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+}
+
+.theme-minimal .section:not(.collapsed) .skill-card,
+.theme-minimal .section.collapsed .skill-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0s !important;
+}
+
+.theme-minimal .section:not(.collapsed) .project-list li,
+.theme-minimal .section:not(.collapsed) .hobby-list li,
+.theme-minimal .section.collapsed .project-list li,
+.theme-minimal .section.collapsed .hobby-list li {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0s !important;
+}
+
+/* ==================== 移动端适配 ==================== */
+@media (max-width: 768px) {
+    .theme-minimal .container {
+        flex-direction: column !important;
+    }
+    
+    .theme-minimal .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        position: static !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        padding: 1rem !important;
+    }
+    
+    .theme-minimal .sidebar-nav {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+    
+    .theme-minimal .sidebar-nav-item {
+        margin-bottom: 0 !important;
+    }
+    
+    .theme-minimal .sidebar-nav-link {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .theme-minimal .sidebar-nav-link.active {
+        border-left: none !important;
+        border-bottom: 2px solid var(--accent) !important;
+        padding-left: 0.75rem !important;
+        padding-bottom: calc(0.5rem - 2px) !important;
+    }
+    
+    .theme-minimal .main-content {
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+    }
+}

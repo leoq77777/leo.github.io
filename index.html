@@ -3,714 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leo Qin's Personal Homepage - Sleep Enthusiast & Code Learner">
     <title>Leo Qin's Personal Homepage</title>
+    
+    <!-- Preconnect for performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- External Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --card-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #e2e8f0;
-            --accent: #667eea;
-            --accent-2: #f093fb;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #0f172a;
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
-                radial-gradient(2px 2px at 80% 20%, #fff, transparent),
-                radial-gradient(1px 1px at 40% 70%, #fff, transparent),
-                radial-gradient(1px 1px at 60% 40%, #fff, transparent),
-                radial-gradient(1px 1px at 30% 80%, #fff, transparent),
-                radial-gradient(1px 1px at 70% 60%, #fff, transparent),
-                radial-gradient(1px 1px at 90% 80%, #fff, transparent),
-                radial-gradient(1px 1px at 10% 50%, #fff, transparent),
-                radial-gradient(1px 1px at 50% 20%, #fff, transparent),
-                radial-gradient(1px 1px at 95% 10%, #fff, transparent);
-            animation: twinkle 3s ease-in-out infinite;
-            z-index: -2;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .nebula {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 60%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
-            z-index: -1;
-            animation: float 10s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(180deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%); }
-            100% { transform: translateX(100%) translateY(100%); }
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .avatar-container:hover {
-            transform: scale(1.05);
-        }
-
-        .avatar {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid transparent;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2)) padding-box,
-                       linear-gradient(45deg, var(--accent), var(--accent-2)) border-box;
-            padding: 3px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); }
-            50% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6); }
-        }
-
-        .avatar-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-        }
-
-        .profile-info h1 {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #fff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .profile-info h2 {
-            font-size: 1.5em;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-info h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            border-radius: 2px;
-        }
-
-        .bio {
-            font-size: 1em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: left;
-            padding: 0 5px;
-        }
-
-        
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .section {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 20px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            height: 320px;  /* 统一固定高度 */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .section.collapsed {
-            height: 120px;
-            overflow: hidden;
-        }
-
-        .section:not(.collapsed) {
-            height: 320px; /* 展开时固定高度，与收起时保持一致 */
-            overflow: visible;
-        }
-
-        .section-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-            transition-delay: 0.1s;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-        .section:not(.collapsed) .section-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 20px;
-            opacity: 1;
-            transform: none;
-            position: relative;
-            z-index: 2;
-            font-size: 1.6em;  /* 统一字体大小 */
-            display: flex;
-            align-items: center;
-            gap: 12px;  /* 图标和文字的间距 */
-        }
-
-        .section-title i {
-            color: var(--accent);
-            font-size: 1.3em;
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .section.collapsed .section-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin-bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            padding: 15px 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            width: 220px;  /* 固定宽度 */
-            min-width: 220px;
-            max-width: 220px;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        .section:not(.collapsed) .section-title {
-            position: relative;
-            top: 0;
-            left: 0;
-            transform: none;
-            margin-bottom: 20px;
-            background: transparent;
-            padding: 0;
-            border: none;
-        }
-
-        .skill-grid {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
-            grid-auto-rows: auto !important;
-            gap: 8px !important;  /* 减少间距 */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-            transition-delay: 0.2s;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-        .section:not(.collapsed) .skill-grid {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill-card {
-            width: 100% !important;
-            max-width: 100% !important;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 12px;  /* 减少padding */
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;  /* 减少gap */
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .project-list,
-        .hobby-list {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-            transition-delay: 0.2s;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-        .section:not(.collapsed) .project-list,
-        .section:not(.collapsed) .hobby-list {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill-card {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-        }
-
-        .section:not(.collapsed) .skill-card:nth-child(1) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.3s;
-        }
-
-        .section:not(.collapsed) .skill-card:nth-child(2) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.4s;
-        }
-
-        .section:not(.collapsed) .skill-card:nth-child(3) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.5s;
-        }
-
-        .section:not(.collapsed) .skill-card:nth-child(4) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.6s;
-        }
-
-        .project-list li,
-        .hobby-list li {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ease;
-        }
-
-        .section:not(.collapsed) .project-list li:nth-child(1),
-        .section:not(.collapsed) .hobby-list li:nth-child(1) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.3s;
-        }
-
-        .section:not(.collapsed) .project-list li:nth-child(2),
-        .section:not(.collapsed) .hobby-list li:nth-child(2) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.4s;
-        }
-
-        .section:not(.collapsed) .project-list li:nth-child(3),
-        .section:not(.collapsed) .hobby-list li:nth-child(3) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.5s;
-        }
-
-        .section:not(.collapsed) .project-list li:nth-child(4),
-        .section:not(.collapsed) .hobby-list li:nth-child(4) {
-            opacity: 1;
-            transform: translateX(0);
-            transition-delay: 0.6s;
-        }
-
-        
-
-        .skill-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .skill-title {
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .skill-desc {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            line-height: 1.5;
-            max-width: 100%;
-            width: 100%;
-            word-wrap: break-word;
-            text-align: center;
-        }
-
-        .project-list, .hobby-list {
-            list-style: none;
-        }
-
-        .project-list li, .hobby-list li {
-            padding: 10px 12px;  /* 减少padding */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;  /* 减少gap */
-        }
-
-        .project-list li:last-child, .hobby-list li:last-child {
-            border-bottom: none;
-        }
-
-        .project-list li:hover, .hobby-list li:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-
-        .project-icon, .hobby-icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            min-height: 40px;
-            max-width: 40px;
-            max-height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            flex-shrink: 0;
-            margin-top: 2px;
-            position: relative;
-            z-index: 2;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .project-icon i, .hobby-icon i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2em;
-            margin: 0;
-            padding: 0;
-            width: auto;
-            height: auto;
-            display: inline-flex;
-        }
-
-        .project-list li div, .hobby-list li div {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .project-list li div > div:first-child, .hobby-list li div > div:first-child {
-            text-align: left;
-            width: 100%;
-            font-weight: 600;
-            font-size: 1em;
-            color: #fff;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .project-list li div > div:last-child, .hobby-list li div > div:last-child {
-            text-align: left;
-            width: 100%;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            min-width: 80px;
-            position: relative;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-2px);
-            border-color: rgba(102, 126, 234, 0.5);
-        }
-
-        .contact-icon-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover .contact-icon-container {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 1.5em;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover .contact-icon {
-            transform: scale(1.1);
-            color: #fff;
-        }
-
-        .contact-value {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-            text-align: center;
-            line-height: 1.4;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(5px);
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-item.expanded .contact-value {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .contact-item.expanded {
-            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
-            border-color: rgba(102, 126, 234, 0.6);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .contact-item.expanded .contact-icon {
-            animation: pulse 2s infinite;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-secondary);
-            font-size: 0.95em;
-        }
-
-        .floating-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2));
-            border: none;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .floating-button:hover {
-            transform: scale(1.1) rotate(180deg);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        @media (max-width: 900px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2.5em;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .header {
-                padding: 25px;
-            }
-
-            .avatar {
-                width: 140px;
-                height: 140px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="minimal-theme.css">
+    <link rel="stylesheet" href="resources.css">
+    <link rel="stylesheet" href="master-mode.css">
+    <link rel="stylesheet" href="custom-cursor.css">
+    <link rel="stylesheet" href="file-storage.css">
 </head>
-<body>
-    <div class="stars"></div>
-    <div class="nebula"></div>
-    
-    <div class="container">
-        <div class="header">
+<body class="theme-minimal">
+    <main class="container">
+        <header class="header">
             <div class="profile-grid">
                 <div>
-                    <div class="avatar-container" onclick="animateAvatar()">
-                        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Leo头像" class="avatar">
-                        <div class="avatar-glow"></div>
+                    <div class="avatar-container" onclick="animateAvatar()" role="button" tabindex="0" aria-label="Click to animate avatar">
+                        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Leo Qin's profile picture" class="avatar">
+                        <div class="avatar-glow" aria-hidden="true"></div>
                     </div>
                 </div>
                 <div class="profile-info">
@@ -718,8 +36,6 @@
                     <h2><i class="fas fa-moon"></i> Sleep Enthusiast & Code Learner</h2>
                     <p class="bio">I'm Leo, an econ undergraduate on the journey of CS.</p>
                     
-                    
-
                     <div class="contact-info">
                         <div class="contact-item" onmouseenter="expandContact(this)" onmouseleave="collapseContact(this)" data-contact="email" data-value="leoq728@163.com" data-url="mailto:leoq728@163.com" onclick="handleContactClick(this)">
                             <div class="contact-icon-container">
@@ -742,140 +58,147 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <div class="content-grid">
-            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
-                <div class="section-title">
-                    <i class="fas fa-user"></i>
+        <section class="content-grid">
+            <article class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <h2 class="section-title">
+                    <i class="fas fa-user" aria-hidden="true"></i>
                     About Me
-                </div>
+                </h2>
                 <div class="section-content">
-                    <p class="bio">I received my bachelor degree of Economics from <a href="https://www.nju.edu.cn" target="_blank" style="color: #667eea; text-decoration: none; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(102,126,234,0.3);">Nanjing University</a>, yet professional in neither Econ, nor CS</p>
+                    <p class="bio">I received my bachelor degree of Economics from <a href="https://www.nju.edu.cn" target="_blank" rel="noopener noreferrer" class="link-external">Nanjing University</a>, yet professional in neither Econ, nor CS</p>
                     <br>
                     <p class="bio">While I'm stumbling in pursuing a Master of Computer Science</p>
                 </div>
-            </div>
+            </article>
 
-            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
-                <div class="section-title">
-                    <i class="fas fa-laptop-code"></i>
+            <article class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <h2 class="section-title">
+                    <i class="fas fa-laptop-code" aria-hidden="true"></i>
                     Skills
-                </div>
+                </h2>
                 <div class="section-content">
                     <div class="skill-grid">
                         <div class="skill-card">
                             <div class="skill-icon">
-                                <i class="fas fa-cogs"></i>
+                                <i class="fas fa-cogs" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">C & C++</div>
                             <div class="skill-desc">Dream to be a Pointer expert</div>
                         </div>
                         <div class="skill-card">
                             <div class="skill-icon">
-                                <i class="fas fa-robot"></i>
+                                <i class="fas fa-robot" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">AI Application</div>
                             <div class="skill-desc">I use AI everyday!</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
-                <div class="section-title">
-                    <i class="fas fa-project-diagram"></i>
+            <article class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
                     Projects
-                </div>
+                </h2>
                 <div class="section-content">
                     <ul class="project-list">
                         <li>
-                            <div class="project-icon">
+                            <div class="project-icon" aria-hidden="true">
                                 <i class="fas fa-robot"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600; font-size:1.1em;">AI Agents</div>
-                                <div style="color:var(--text-secondary)">an LLM-powered investment advisor</div>
+                                <div class="project-title">AI Agents</div>
+                                <div class="project-desc">an LLM-powered investment advisor</div>
                             </div>
                         </li>
                         <li>
-                            <div class="project-icon">
+                            <div class="project-icon" aria-hidden="true">
                                 <i class="fas fa-gamepad"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600; font-size:1.1em;">Game Development</div>
-                                <div style="color:var(--text-secondary)">a broken yet exhausting imitation of RimWorld</div>
+                                <div class="project-title">Game Development</div>
+                                <div class="project-desc">a broken yet exhausting imitation of RimWorld</div>
                             </div>
                         </li>
                         <li>
-                            <div class="project-icon">
+                            <div class="project-icon" aria-hidden="true">
                                 <i class="fas fa-cloud"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600; font-size:1.1em;">Others</div>
-                                <div style="color:var(--text-secondary)">Learning and implement of Tiny Webserver & Muduo</div>
+                                <div class="project-title">Others</div>
+                                <div class="project-desc">Learning and implement of Tiny Webserver & Muduo</div>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </article>
 
-            <div class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
-                <div class="section-title">
-                    <i class="fas fa-heart"></i>
-                    Interests
-                </div>
+            <article class="section" onmouseenter="expandSection(this)" onmouseleave="collapseSection(this)">
+                <h2 class="section-title">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    Resources
+                </h2>
                 <div class="section-content">
                     <ul class="hobby-list">
                         <li>
-                            <div class="hobby-icon">
+                            <div class="hobby-icon" aria-hidden="true">
                                 <i class="fas fa-gamepad"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600">ESports</div>
-                                <div style="color:var(--text-secondary)">Won a second-place in NJU Valorant Competition as Team Leader</div>
+                                <div class="hobby-title">ESports</div>
+                                <div class="hobby-desc">Won a second-place in NJU Valorant Competition as Team Leader</div>
                             </div>
                         </li>
                         <li>
-                            <div class="hobby-icon">
+                            <div class="hobby-icon" aria-hidden="true">
                                 <i class="fas fa-music"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600">Music</div>
-                                <div style="color:var(--text-secondary)">Into Lauv, NIKI, KPOP, R&B</div>
+                                <div class="hobby-title">Music</div>
+                                <div class="hobby-desc">Into Lauv, NIKI, KPOP, R&B</div>
                             </div>
                         </li>
                         <li>
-                            <div class="hobby-icon">
+                            <div class="hobby-icon" aria-hidden="true">
                                 <i class="fas fa-film"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600">Movies</div>
-                                <div style="color:var(--text-secondary)">Horror and Romance Lover</div>
+                                <div class="hobby-title">Movies</div>
+                                <div class="hobby-desc">Horror and Romance Lover</div>
                             </div>
                         </li>
                         <li>
-                            <div class="hobby-icon">
+                            <div class="hobby-icon" aria-hidden="true">
                                 <i class="fas fa-language"></i>
                             </div>
                             <div>
-                                <div style="font-weight:600">Language</div>
-                                <div style="color:var(--text-secondary)">I am learning English, Korean and Spanish</div>
+                                <div class="hobby-title">Language</div>
+                                <div class="hobby-desc">I am learning English, Korean and Spanish</div>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
+            </article>
+        </section>
 
-        <div class="footer">
+        <footer class="footer">
             <p>✨ Wish you a good luck ✨</p>
-        </div>
-    </div>
+        </footer>
+    </main>
 
-    <button class="floating-button" onclick="scrollToTop()" title="Back to Top">
-        <i class="fas fa-arrow-up"></i>
+    <button class="floating-button" onclick="scrollToTop()" title="Back to Top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
+    
+    <!-- JavaScript Files -->
     <script src="script.js"></script>
+    <script src="minimal-layout.js"></script>
+    <script src="github-storage.js"></script>
+    <script src="master-mode.js"></script>
+    <script src="resources.js"></script>
+    <script src="file-storage.js"></script>
 </body>
 </html>
