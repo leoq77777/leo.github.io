@@ -55,34 +55,64 @@ class DocsManager {
      */
     async loadDocsList() {
         try {
-            // 尝试从 docs/index.json 读取文件列表（如果存在）
-            // 否则通过 GitHub API 获取
+            // 优先从 docs/index.json 读取文件列表
             const response = await fetch(`${this.docsPath}index.json`);
             if (response.ok) {
                 const data = await response.json();
                 this.docs = data.files || [];
-            } else {
-                // 如果没有 index.json，尝试直接读取示例文件
-                // 在实际使用中，可以通过 GitHub API 获取文件列表
-                this.docs = await this.fetchDocsFromGitHub();
+                return;
             }
         } catch (error) {
-            console.warn('无法加载文档列表，使用默认列表:', error);
-            // 使用默认文档列表
-            this.docs = [
-                { name: 'example.md', title: 'Example' },
-                { name: 'README.md', title: 'README' }
-            ];
+            console.warn('无法加载 index.json:', error);
         }
+
+        // 如果 index.json 不存在，尝试从 GitHub API 获取
+        try {
+            this.docs = await this.fetchDocsFromGitHub();
+            if (this.docs.length > 0) {
+                return;
+            }
+        } catch (error) {
+            console.warn('无法从 GitHub API 获取文档列表:', error);
+        }
+
+        // 如果都失败，使用默认列表
+        this.docs = [
+            { name: 'example.md', title: 'Example' },
+            { name: 'README.md', title: 'README' }
+        ];
     }
 
     /**
-     * 从 GitHub API 获取文档列表（可选功能）
+     * 从 GitHub API 获取文档列表
      */
     async fetchDocsFromGitHub() {
-        // 这里可以通过 GitHub API 获取 docs/ 目录下的文件列表
-        // 暂时返回空数组，后续可以扩展
-        return [];
+        // GitHub API 获取仓库内容
+        // 格式: https://api.github.com/repos/{owner}/{repo}/contents/{path}
+        const repo = 'leoq77777/leo.github.io';
+        const path = 'docs';
+        
+        try {
+            const response = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`);
+            if (!response.ok) {
+                throw new Error(`GitHub API 错误: ${response.status}`);
+            }
+
+            const files = await response.json();
+            // 过滤出 .md 文件
+            const mdFiles = files
+                .filter(file => file.name.endsWith('.md') && file.type === 'file')
+                .map(file => ({
+                    name: file.name,
+                    title: this.getTitleFromFileName(file.name),
+                    sha: file.sha
+                }));
+
+            return mdFiles;
+        } catch (error) {
+            console.error('从 GitHub API 获取文档列表失败:', error);
+            return [];
+        }
     }
 
     /**
