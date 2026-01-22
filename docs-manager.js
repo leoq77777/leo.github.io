@@ -129,10 +129,23 @@ class DocsManager {
      * 在指定的面板中渲染文档
      */
     renderInPanel(panel) {
-        if (!panel) return;
+        if (!panel) {
+            console.warn('Panel not found for docs rendering');
+            return;
+        }
 
         // 如果面板已经有内容且是查看器模式，不重新渲染
-        if (panel.querySelector('.docs-viewer') && panel.querySelector('.docs-viewer').style.display !== 'none') {
+        const existingViewer = panel.querySelector('.docs-viewer');
+        if (existingViewer && existingViewer.style.display !== 'none') {
+            return;
+        }
+
+        // 确保文档列表已加载
+        if (this.docs.length === 0) {
+            // 如果文档列表为空，重新加载
+            this.loadDocsList().then(() => {
+                this.renderInPanel(panel);
+            });
             return;
         }
 
@@ -210,7 +223,13 @@ class DocsManager {
      */
     renderDocsList() {
         const docsList = document.getElementById('docs-list');
-        if (!docsList) return;
+        if (!docsList) {
+            console.warn('docs-list element not found');
+            return;
+        }
+
+        console.log('Rendering docs list, count:', this.docs.length);
+        console.log('Docs:', this.docs);
 
         if (this.docs.length === 0) {
             docsList.innerHTML = `
@@ -223,13 +242,16 @@ class DocsManager {
             return;
         }
 
-        docsList.innerHTML = this.docs.map(doc => `
-            <div class="docs-item" onclick="docsManager.openDoc('${doc.name}')">
-                <i class="fas fa-file-alt"></i>
-                <span class="docs-item-title">${doc.title || this.getTitleFromFileName(doc.name)}</span>
-                <i class="fas fa-chevron-right docs-item-arrow"></i>
-            </div>
-        `).join('');
+        docsList.innerHTML = this.docs.map(doc => {
+            const title = doc.title || this.getTitleFromFileName(doc.name);
+            return `
+                <div class="docs-item" onclick="docsManager.openDoc('${doc.name}')">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="docs-item-title">${title}</span>
+                    <i class="fas fa-chevron-right docs-item-arrow"></i>
+                </div>
+            `;
+        }).join('');
     }
 
     /**
