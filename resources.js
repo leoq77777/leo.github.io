@@ -252,9 +252,22 @@ class ResourcesManager {
         }
 
         if (this.resources[type] && this.resources[type][index]) {
+            // 确认删除
+            if (!confirm(`确定要删除 "${this.resources[type][index].title || '此项'}" 吗？`)) {
+                return;
+            }
+            
             this.resources[type].splice(index, 1);
-            await this.saveResources(); // 保存到 GitHub Gist
-            this.renderTabContent(type);
+            const success = await this.saveResources(); // 保存到 GitHub Gist
+            
+            if (success) {
+                this.renderTabContent(type);
+            } else {
+                // 如果保存失败，恢复数据
+                this.loadResourcesFromFile();
+                this.renderTabContent(type);
+                this.showNotification('删除失败，请检查网络连接和 Token 配置', 'error');
+            }
         }
     }
 
@@ -274,7 +287,14 @@ class ResourcesManager {
     async saveResources() {
         if (!document.body.classList.contains('master-mode')) {
             console.warn('仅 Master 模式可保存资源');
-            return;
+            return false;
+        }
+
+        // 检查 GitHub Token 是否配置
+        if (!githubStorage.githubToken) {
+            this.showNotification('GitHub Token 未配置，无法保存', 'error');
+            console.error('GitHub Token 未配置');
+            return false;
         }
 
         try {
@@ -284,12 +304,15 @@ class ResourcesManager {
                 // 重新加载以确保同步
                 await this.loadResourcesFromFile();
                 this.renderResources();
+                return true;
             } else {
-                this.showNotification('保存失败', 'error');
+                this.showNotification('保存失败，请检查 Token 和网络连接', 'error');
+                return false;
             }
         } catch (e) {
             console.error('保存资源失败:', e);
-            this.showNotification('保存失败: ' + e.message, 'error');
+            this.showNotification('保存失败: ' + (e.message || '未知错误'), 'error');
+            return false;
         }
     }
 
