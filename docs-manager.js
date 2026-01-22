@@ -156,10 +156,21 @@ class DocsManager {
 
         // 如果没有找到，在 Resources 后面创建一个
         const contentGrid = document.querySelector('.content-grid');
-        if (!contentGrid) return null;
+        if (!contentGrid) {
+            // 如果 content-grid 不存在，等待一下再试
+            setTimeout(() => {
+                const section = this.findOrCreateDocsSection();
+                if (section) {
+                    this.createDocsSection();
+                }
+            }, 500);
+            return null;
+        }
 
         const newSection = document.createElement('article');
         newSection.className = 'section';
+        newSection.setAttribute('onmouseenter', 'expandSection(this)');
+        newSection.setAttribute('onmouseleave', 'collapseSection(this)');
         newSection.innerHTML = `
             <h2 class="section-title">
                 <i class="fas fa-file-alt" aria-hidden="true"></i>
@@ -167,7 +178,19 @@ class DocsManager {
             </h2>
             <div class="section-content"></div>
         `;
-        contentGrid.appendChild(newSection);
+        
+        // 插入到 Resources 部分之后
+        const resourcesSection = Array.from(sections).find(section => {
+            const title = section.querySelector('.section-title');
+            return title && title.textContent.includes('Resources');
+        });
+        
+        if (resourcesSection && resourcesSection.nextSibling) {
+            contentGrid.insertBefore(newSection, resourcesSection.nextSibling);
+        } else {
+            contentGrid.appendChild(newSection);
+        }
+        
         return newSection;
     }
 
